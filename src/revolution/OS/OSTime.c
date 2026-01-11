@@ -1,5 +1,30 @@
 #include <revolution/OS.h>
 
+#ifdef PLATFORM_PC
+#include <SDL2/SDL.h>
+#include <time.h>
+
+// PC implementations
+s64 OSGetTime(void) {
+    // Return microseconds since start
+    return SDL_GetPerformanceCounter() * 1000000ULL / SDL_GetPerformanceFrequency();
+}
+
+u32 OSGetTick(void) {
+    return (u32)SDL_GetTicks();
+}
+
+s64 __OSGetSystemTime(void) {
+    return OSGetTime();
+}
+
+s64 __OSTimeToSystemTime(s64 time) {
+    return time;
+}
+
+#else
+// Wii implementations with PowerPC assembly
+
 #define USEC_MAX 1000
 #define MSEC_MAX 1000
 #define MONTH_MAX 12
@@ -153,3 +178,5 @@ s64 OSCalendarTimeToTicks(const OSCalendarTime* cal) {
     return OS_SEC_TO_TICKS(seconds) + OS_MSEC_TO_TICKS((s64)cal->msec) +
            OS_USEC_TO_TICKS((s64)cal->usec);
 }
+
+#endif // PLATFORM_PC
