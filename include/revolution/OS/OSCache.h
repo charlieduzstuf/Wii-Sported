@@ -1,6 +1,37 @@
 #ifndef RVL_SDK_OS_CACHE_H
 #define RVL_SDK_OS_CACHE_H
 #include <types.h>
+
+#ifdef PLATFORM_PC
+// Cache functions are no-ops on PC (x86/x64 handles cache coherency automatically)
+#define DCEnable() ((void)0)
+#define DCInvalidateRange(buf, len) ((void)0)
+#define DCFlushRange(buf, len) ((void)0)
+#define DCStoreRange(buf, len) ((void)0)
+#define DCFlushRangeNoSync(buf, len) ((void)0)
+#define DCStoreRangeNoSync(buf, len) ((void)0)
+#define DCZeroRange(buf, len) memset((void*)(buf), 0, (len))
+
+#define ICInvalidateRange(buf, len) ((void)0)
+#define ICFlashInvalidate() ((void)0)
+#define ICEnable() ((void)0)
+
+#define LCEnable() ((void)0)
+#define LCDisable() ((void)0)
+#define LCLoadBlocks(dst, src, blocks) memcpy((dst), (src), (blocks) * 32)
+#define LCStoreBlocks(dst, src, blocks) memcpy((dst), (src), (blocks) * 32)
+#define LCStoreData(dst, src, len) (memcpy((dst), (src), (len)), (len))
+#define LCQueueLength() (0)
+#define LCQueueWait(n) ((void)0)
+
+#define L2Enable() ((void)0)
+#define L2Disable() ((void)0)
+#define L2GlobalInvalidate() ((void)0)
+
+#define __OSCacheInit() ((void)0)
+
+#else
+// Original Wii implementation
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -41,4 +72,6 @@ void __OSCacheInit(void);
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // Wii implementation
+
+#endif // RVL_SDK_OS_CACHE_H

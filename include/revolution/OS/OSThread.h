@@ -2,6 +2,49 @@
 #define RVL_SDK_OS_THREAD_H
 #include <types.h>
 
+#ifdef PLATFORM_PC
+// PC threading using SDL2
+#include <SDL2/SDL_thread.h>
+#include <SDL2/SDL_mutex.h>
+
+typedef SDL_Thread OSThread;
+typedef SDL_ThreadFunction OSThreadFunc;
+
+// Thread functions mapped to SDL2
+#define OSCreateThread(thread, func, arg, stack, stackSize, prio, flags) \
+    ((*(thread) = SDL_CreateThread(func, "GameThread", arg)) != NULL)
+
+#define OSJoinThread(thread, val) \
+    (SDL_WaitThread(*(thread), (int*)(val)), TRUE)
+
+#define OSDetachThread(thread) SDL_DetachThread(*(thread))
+
+#define OSYieldThread() SDL_Delay(0)
+
+#define OSSleepTicks(ticks) SDL_Delay((u32)OS_TICKS_TO_MSEC(ticks))
+
+// Simplified thread priority/state (not fully emulated on PC)
+#define OS_PRIORITY_MIN 0
+#define OS_PRIORITY_MAX 31
+#define OSSetThreadPriority(thread, prio) (TRUE)
+#define OSGetCurrentThread() SDL_ThreadID()
+#define OSIsThreadTerminated(thread) (FALSE)
+
+// Scheduler functions (no-ops on PC)
+#define OSDisableScheduler() (0)
+#define OSEnableScheduler() (0)
+
+// Thread queues (simplified for PC)
+typedef struct OSThreadQueue {
+    void* dummy;
+} OSThreadQueue;
+
+#define OSInitThreadQueue(queue) ((void)0)
+#define OSSleepThread(queue) SDL_Delay(10)
+#define OSWakeupThread(queue) ((void)0)
+
+#else
+// Original Wii implementation
 #include <revolution/OS/OSContext.h>
 #ifdef __cplusplus
 extern "C" {
@@ -89,4 +132,6 @@ void OSSleepTicks(s64 ticks);
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // Wii implementation
+
+#endif // RVL_SDK_OS_THREAD_H
