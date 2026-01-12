@@ -51,6 +51,7 @@ set(PC_SOURCES
     src/gx_opengl/gx_vertex.cpp
     src/gx_opengl/gx_matrix.cpp
     src/pc_asset_loader.cpp
+    src/rom_loader.cpp
 )
 
 # Main sources
