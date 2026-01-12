@@ -41,6 +41,7 @@ set(PC_SOURCES
     src/gx_opengl/gx_state.cpp
     src/gx_opengl/gx_texture.cpp
     src/gx_opengl/gx_vertex.cpp
+    src/gx_opengl/gx_matrix.cpp
 )
 
 # Main sources
