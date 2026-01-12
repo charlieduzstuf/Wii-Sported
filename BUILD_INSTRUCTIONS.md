@@ -1,12 +1,13 @@
 # Wii Sports PC Port - Build Instructions
 
-## Important: ROM Asset Extraction
+## Important: ROM Required At Compile Time
 
-**The PC build NO LONGER requires the ROM at compile time!**
+**This is a semi-complete decompilation.** The ROM contains binary PowerPC code that has NOT been decompiled yet.
 
-The build process is now split into two parts:
-1. **Build the executable** (no ROM needed)
-2. **Extract assets from ROM** (one-time operation)
+**ROM is required AT COMPILE TIME as a build input:**
+- The decompiled source code (in this repo) will be compiled to native x86-64
+- The binary code from the ROM will be extracted and integrated
+- Result: Complete PC executable containing both decompiled and binary code
 
 ## Prerequisites
 
@@ -36,12 +37,18 @@ sudo apt-get install -y cmake build-essential libsdl2-dev libgl1-mesa-dev pkg-co
 brew install cmake sdl2 python3
 ```
 
-### Asset Extraction Tool (All Platforms)
-Install Wiimms ISO Tools for ROM extraction:
-- Download from: https://wit.wiimm.de/
-- Extract and add to your PATH
+## Step 1: Place Your ROM
 
-## Building the PC Executable (NO ROM REQUIRED!)
+**Before building**, you must place your Wii Sports ROM in the expected location:
+
+```bash
+mkdir -p orig/RSPE01_01
+cp /path/to/your/wii_sports.iso orig/RSPE01_01/
+```
+
+The build system will extract code from this ROM during compilation.
+
+## Step 2: Build the PC Executable (ROM Extracted During Build)
 
 ### Configure
 ```bash
