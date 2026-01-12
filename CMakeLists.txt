@@ -26,6 +26,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/include/nw4r
     ${CMAKE_SOURCE_DIR}/include/egg
     ${CMAKE_SOURCE_DIR}/include/Pack
+    ${CMAKE_SOURCE_DIR}/src/gx_opengl
     ${SDL2_INCLUDE_DIRS}
 )
 
@@ -36,6 +37,7 @@ set(PC_SOURCES
     src/revolution/WPAD/WPAD_pc.cpp
     src/revolution/KPAD/KPAD_pc.cpp
     src/revolution/VI/vi_pc.cpp
+    src/gx_opengl/gx_state.cpp
 )
 
 # Main sources
