@@ -34,9 +34,11 @@ jobs:
         git clone https://github.com/Microsoft/vcpkg.git
         cd vcpkg
         ./bootstrap-vcpkg.bat
-        ./vcpkg integrate install
-    - name: Install SDL2
-      run: ./vcpkg/vcpkg install sdl2:x64-windows
+        cd ..
+    - name: Install SDL2 via vcpkg
+      run: |
+        ./vcpkg/vcpkg install sdl2:x64-windows
+        ./vcpkg/vcpkg list
     - name: Configure
       run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
     - name: Build
