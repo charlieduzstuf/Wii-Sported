@@ -9,27 +9,46 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # Platform definition
 add_definitions(-DPLATFORM_PC)
 
-# Find packages - prefer vcpkg SDL2 on Windows, pkg-config on Linux
-# Try CONFIG mode first (vcpkg), then pkg-config (system install)
+# Find SDL2 - vcpkg provides it via CONFIG mode
+# Note: vcpkg should be set up via -DCMAKE_TOOLCHAIN_FILE when building
 find_package(SDL2 CONFIG QUIET)
 
+if(NOT SDL2_FOUND)
+    # Try standard find_package
+    find_package(SDL2 QUIET)
+endif()
+
+if(NOT SDL2_FOUND)
+    # Fall back to pkg-config on Unix systems
+    if(UNIX)
+        find_package(PkgConfig QUIET)
+        if(PkgConfig_FOUND)
+            pkg_search_module(SDL2 QUIET sdl2)
+            if(SDL2_FOUND)
+                message(STATUS "Found SDL2 via pkg-config")
+            endif()
+        endif()
+    endif()
+endif()
+
 if(SDL2_FOUND)
-    # vcpkg SDL2 (CONFIG mode) - use targets
-    set(SDL2_LIBRARIES SDL2::SDL2)
-    if(WIN32)
-        set(SDL2_LIBRARIES ${SDL2_LIBRARIES} SDL2::SDL2main)
-    endif()
-    set(SDL2_INCLUDE_DIRS "")
-    message(STATUS "Found SDL2 via CONFIG mode")
-else()
-    # Fall back to pkg-config
-    find_package(PkgConfig QUIET)
-    if(PkgConfig_FOUND)
-        pkg_search_module(SDL2 REQUIRED sdl2)
-        message(STATUS "Found SDL2 via pkg-config")
+    # Check if we have target-based SDL2 (vcpkg/modern CMake)
+    if(TARGET SDL2::SDL2)
+        set(SDL2_LIBRARIES SDL2::SDL2)
+        if(WIN32 AND TARGET SDL2::SDL2main)
+            list(APPEND SDL2_LIBRARIES SDL2::SDL2main)
+        endif()
+        set(SDL2_INCLUDE_DIRS "")
+        message(STATUS "Found SDL2 via CONFIG mode (target SDL2::SDL2)")
     else()
-        message(FATAL_ERROR "SDL2 not found. Install SDL2 via vcpkg or system package manager.")
+        # pkg-config or old-style find module
+        message(STATUS "Found SDL2 (non-target mode)")
     endif()
+else()
+    message(FATAL_ERROR "SDL2 not found. Please install SDL2:\n"
+                        "  - Windows: vcpkg install sdl2\n"
+                        "  - Linux: sudo apt-get install libsdl2-dev\n"
+                        "  - macOS: brew install sdl2")
 endif()
 
 find_package(OpenGL REQUIRED)
