@@ -9,13 +9,30 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # Platform definition
 add_definitions(-DPLATFORM_PC)
 
-# ROM Path - Optional (ROM loaded at runtime, not compile time)
+# ROM Path - REQUIRED at compile time (semi-complete decompilation)
 set(ROM_PATH "${CMAKE_SOURCE_DIR}/orig/RSPE01_01" CACHE PATH "Path to Wii Sports ROM directory")
 
-# Note: This builds a standalone executable that loads ROM at runtime
-# ROM is NOT required at compile time for PC builds
-# The exe will request ROM path when first run
-message(STATUS "Building standalone PC executable (ROM will be loaded at runtime)")
+# This is a semi-complete decompilation - ROM contains binary code not yet decompiled
+# ROM is extracted and integrated at build time (not runtime)
+# See ROM_ANALYSIS.md for detailed explanation
+
+# Check for ROM (required for complete build)
+if(NOT EXISTS "${ROM_PATH}")
+    message(WARNING "ROM directory not found at: ${ROM_PATH}")
+    message(WARNING "This is a semi-complete decompilation - ROM is needed for non-decompiled code")
+    message(WARNING "Without ROM: Only decompiled portions (~15-30%) will be available")
+    message(WARNING "Place Wii Sports ROM in: ${ROM_PATH}/")
+    set(ROM_AVAILABLE FALSE)
+else()
+    message(STATUS "ROM found at: ${ROM_PATH}")
+    set(ROM_AVAILABLE TRUE)
+    
+    # Include ROM extraction module
+    include(${CMAKE_SOURCE_DIR}/cmake/rom_extract.cmake)
+    
+    # Extract binary code from ROM
+    extract_rom_code("${ROM_PATH}" "${CMAKE_BINARY_DIR}/rom_extracted")
+endif()
 
 # Find SDL2 - vcpkg provides it via CONFIG mode
 # Note: vcpkg should be set up via -DCMAKE_TOOLCHAIN_FILE when building
