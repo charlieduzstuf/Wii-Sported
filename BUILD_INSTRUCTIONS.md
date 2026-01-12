@@ -1,5 +1,13 @@
 # Wii Sports PC Port - Build Instructions
 
+## Important: ROM Asset Extraction
+
+**The PC build NO LONGER requires the ROM at compile time!**
+
+The build process is now split into two parts:
+1. **Build the executable** (no ROM needed)
+2. **Extract assets from ROM** (one-time operation)
+
 ## Prerequisites
 
 ### Windows
@@ -15,19 +23,25 @@
    ```powershell
    ./vcpkg install sdl2:x64-windows
    ```
+4. Install Python 3.8+ for asset extraction
 
 ### Linux
 ```bash
 sudo apt-get update
-sudo apt-get install -y cmake build-essential libsdl2-dev libgl1-mesa-dev pkg-config
+sudo apt-get install -y cmake build-essential libsdl2-dev libgl1-mesa-dev pkg-config python3
 ```
 
 ### macOS
 ```bash
-brew install cmake sdl2
+brew install cmake sdl2 python3
 ```
 
-## Building
+### Asset Extraction Tool (All Platforms)
+Install Wiimms ISO Tools for ROM extraction:
+- Download from: https://wit.wiimm.de/
+- Extract and add to your PATH
+
+## Building the PC Executable (NO ROM REQUIRED!)
 
 ### Configure
 ```bash
@@ -35,7 +49,7 @@ brew install cmake sdl2
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 
 # Windows with vcpkg
-cmake -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
 
 ### Compile
@@ -43,7 +57,21 @@ cmake -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 cmake --build build --config Release
 ```
 
-### Run
+This creates `build/bin/WiiSports` (or `WiiSports.exe` on Windows).
+
+## Extracting Assets from ROM (ONE-TIME OPERATION)
+
+Before running the game, you must extract assets from your Wii Sports ROM:
+
+```bash
+python asset_extractor.py --rom /path/to/your/wii_sports.iso
+```
+
+This creates a `pc_assets/` directory with all game data.  
+**The ROM is no longer needed after this step!**
+
+## Running the Game
+
 ```bash
 # Linux/macOS
 ./build/bin/WiiSports
