@@ -37,6 +37,7 @@ set(PC_SOURCES
     src/revolution/WPAD/WPAD_pc.cpp
     src/revolution/KPAD/KPAD_pc.cpp
     src/revolution/VI/vi_pc.cpp
+    src/revolution/MTX/mtx_pc.c
     src/gx_opengl/gx_state.cpp
 )
 
