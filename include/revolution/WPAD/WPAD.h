@@ -2,6 +2,51 @@
 #define RVL_SDK_WPAD_H
 #include <types.h>
 
+#ifdef PLATFORM_PC
+// PC implementation - Wii Remote mapped to mouse/keyboard
+#include <SDL2/SDL.h>
+
+// WPAD channels
+typedef enum {
+    WPAD_CHAN0, WPAD_CHAN1, WPAD_CHAN2, WPAD_CHAN3,
+    WPAD_MAX_CONTROLLERS,
+    WPAD_CHAN_INVALID = -1
+} WPADChannel;
+
+// WPAD buttons
+typedef enum {
+    WPAD_BUTTON_LEFT = (1 << 0),
+    WPAD_BUTTON_RIGHT = (1 << 1),
+    WPAD_BUTTON_DOWN = (1 << 2),
+    WPAD_BUTTON_UP = (1 << 3),
+    WPAD_BUTTON_PLUS = (1 << 4),
+    WPAD_BUTTON_2 = (1 << 8),
+    WPAD_BUTTON_1 = (1 << 9),
+    WPAD_BUTTON_B = (1 << 10),
+    WPAD_BUTTON_A = (1 << 11),
+    WPAD_BUTTON_MINUS = (1 << 12),
+    WPAD_BUTTON_HOME = (1 << 15),
+} WPADButton;
+
+// Simplified WPAD status for PC
+typedef struct WPADStatus {
+    u32 button;
+    Vec acc;
+    f32 roll;
+    f32 pitch;
+    Vec2 dpd[4];
+} WPADStatus;
+
+// PC function stubs/implementations
+void WPADInit(void);
+s32 WPADProbe(s32 chan, u32* devType);
+void WPADRead(s32 chan, WPADStatus* status);
+#define WPADSetDataFormat(chan, fmt) ((void)0)
+#define WPADIsDpdEnabled(chan) (1)
+#define WPADControlDpd(chan, cmd, callback) ((void)0)
+
+#else
+// Original Wii implementation
 #include <revolution/SC.h>
 #include <revolution/WUD.h>
 #ifdef __cplusplus
@@ -344,4 +389,6 @@ s32 WPADReadFaceData(s32 chan, void* dst, u32 size, u32 src, WPADCallback cb);
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // Wii implementation
+
+#endif // RVL_SDK_WPAD_H
