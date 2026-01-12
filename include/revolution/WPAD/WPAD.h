@@ -37,6 +37,9 @@ typedef struct WPADStatus {
     Vec2 dpd[4];
 } WPADStatus;
 
+// WPAD address length constant
+#define WPAD_ADDR_LEN 6
+
 // PC function stubs/implementations
 void WPADInit(void);
 s32 WPADProbe(s32 chan, u32* devType);

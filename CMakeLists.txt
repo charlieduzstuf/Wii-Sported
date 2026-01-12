@@ -10,17 +10,25 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 add_definitions(-DPLATFORM_PC)
 
 # Find packages - prefer vcpkg SDL2 on Windows, pkg-config on Linux
-if(WIN32)
-    # On Windows, use vcpkg SDL2Config
-    find_package(SDL2 CONFIG REQUIRED)
-    set(SDL2_LIBRARIES SDL2::SDL2 SDL2::SDL2main)
+# Try CONFIG mode first (vcpkg), then pkg-config (system install)
+find_package(SDL2 CONFIG QUIET)
+
+if(SDL2_FOUND)
+    # vcpkg SDL2 (CONFIG mode) - use targets
+    set(SDL2_LIBRARIES SDL2::SDL2)
+    if(WIN32)
+        set(SDL2_LIBRARIES ${SDL2_LIBRARIES} SDL2::SDL2main)
+    endif()
     set(SDL2_INCLUDE_DIRS "")
+    message(STATUS "Found SDL2 via CONFIG mode")
 else()
-    # On Linux/Mac, try pkg-config
-    find_package(SDL2 QUIET)
-    if(NOT SDL2_FOUND)
-        find_package(PkgConfig REQUIRED)
+    # Fall back to pkg-config
+    find_package(PkgConfig QUIET)
+    if(PkgConfig_FOUND)
         pkg_search_module(SDL2 REQUIRED sdl2)
+        message(STATUS "Found SDL2 via pkg-config")
+    else()
+        message(FATAL_ERROR "SDL2 not found. Install SDL2 via vcpkg or system package manager.")
     endif()
 endif()
 
