@@ -1,11 +1,54 @@
 #ifndef RVL_SDK_DVD_H
 #define RVL_SDK_DVD_H
 #include <types.h>
+
+#ifdef PLATFORM_PC
+// PC file I/O replacing DVD functions
+#include <stdio.h>
+#include <string.h>
+
+// Simplified DVD structures for PC
+typedef struct DVDFileInfo {
+    FILE* file;
+    u32 offset;
+    u32 size;
+    void* callback;
+} DVDFileInfo;
+
+typedef struct DVDCommandBlock {
+    void* dummy;
+} DVDCommandBlock;
+
+typedef struct DVDDiskID {
+    char game[4];
+    char company[2];
+    u8 disk;
+    u8 version;
+    u8 strmEnable;
+    u8 strmBufSize;
+    u8 padding[14];
+    u32 rvlMagic;
+    u32 gcMagic;
+} DVDDiskID;
+
+// DVD functions mapped to file I/O
+#define DVDInit() ((void)0)
+#define DVDGetDriveStatus() (0)
+#define DVDPause() ((void)0)
+#define DVDResume() ((void)0)
+
+static inline const DVDDiskID* DVDGetCurrentDiskID(void) {
+    static DVDDiskID id = {{'R','S','P','E'}, {'01'}, 1, 0, 0, 0, {0}, 0, 0};
+    return &id;
+}
+
+#else
+// Original Wii implementation
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// OS sets MSB to signal that the device code was successfully read
+// DVD device code constants
 #define DVD_DEVICE_CODE_READ (1 << 15)
 #define MAKE_DVD_DEVICE_CODE(x) (DVD_DEVICE_CODE_READ | (x))
 
@@ -115,4 +158,6 @@ void __DVDRestartMotor(void);
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // Wii implementation
+
+#endif // RVL_SDK_DVD_H
