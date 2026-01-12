@@ -39,6 +39,8 @@ set(PC_SOURCES
     src/revolution/VI/vi_pc.cpp
     src/revolution/MTX/mtx_pc.c
     src/gx_opengl/gx_state.cpp
+    src/gx_opengl/gx_texture.cpp
+    src/gx_opengl/gx_vertex.cpp
 )
 
 # Main sources
