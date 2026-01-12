@@ -9,11 +9,19 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # Platform definition
 add_definitions(-DPLATFORM_PC)
 
-# Find packages - use pkg-config for SDL2 if Config not found
-find_package(SDL2 QUIET)
-if(NOT SDL2_FOUND)
-    find_package(PkgConfig REQUIRED)
-    pkg_search_module(SDL2 REQUIRED sdl2)
+# Find packages - prefer vcpkg SDL2 on Windows, pkg-config on Linux
+if(WIN32)
+    # On Windows, use vcpkg SDL2Config
+    find_package(SDL2 CONFIG REQUIRED)
+    set(SDL2_LIBRARIES SDL2::SDL2 SDL2::SDL2main)
+    set(SDL2_INCLUDE_DIRS "")
+else()
+    # On Linux/Mac, try pkg-config
+    find_package(SDL2 QUIET)
+    if(NOT SDL2_FOUND)
+        find_package(PkgConfig REQUIRED)
+        pkg_search_module(SDL2 REQUIRED sdl2)
+    endif()
 endif()
 
 find_package(OpenGL REQUIRED)
