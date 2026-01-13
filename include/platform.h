@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <cstdarg>
 
 // Include SDL2 (which may include Windows headers on Windows)
 #include <SDL2/SDL.h>
@@ -28,6 +29,25 @@
     #ifdef max
     #undef max
     #endif
+    
+    // Add using declarations for std namespace on Windows
+    using std::fprintf;
+    using std::printf;
+    using std::vprintf;
+    using std::fopen;
+    using std::fclose;
+    using std::fseek;
+    using std::ftell;
+    using std::fread;
+    using std::fwrite;
+    using std::malloc;
+    using std::free;
+    using std::calloc;
+    using std::memset;
+    using std::memcpy;
+    using std::strcmp;
+    using std::strlen;
+    using std::va_list;
 #endif
 
 #endif // PLATFORM_PC

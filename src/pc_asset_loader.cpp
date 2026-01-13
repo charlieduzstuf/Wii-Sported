@@ -4,8 +4,8 @@
 
 #ifdef PLATFORM_PC
 
+#include <platform.h>
 #include "pc_asset_loader.h"
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <sys/stat.h>

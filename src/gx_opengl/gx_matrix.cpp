@@ -1,9 +1,10 @@
 #ifdef PLATFORM_PC
 
-#include <revolution/GX/GX_pc.h>
-#include <SDL2/SDL_opengl.h>
+#include <platform.h>
 #include <cstdint>
 #include <cstring>
+#include <revolution/GX/GX_pc.h>
+#include <SDL2/SDL_opengl.h>
 
 using std::uint8_t;
 using std::uint32_t;

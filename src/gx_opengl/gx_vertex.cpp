@@ -1,15 +1,16 @@
 #ifdef PLATFORM_PC
 
-#include "gx_vertex.h"
-#include <SDL2/SDL_opengl.h>
+#include <platform.h>
 #include <cstdlib>
 #include <cstring>
+#include "gx_vertex.h"
+#include <SDL2/SDL_opengl.h>
 
 using std::malloc;
 using std::free;
 using std::memset;
 
-static GX_VertexFormat currentFormat = {0};
+static GX_VertexFormat currentFormat = {};
 static GXPrimitive currentPrimitive;
 static uint16_t currentNumVerts;
 static int vertexSystemInitialized = 0;

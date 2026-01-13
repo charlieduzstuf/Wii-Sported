@@ -1,5 +1,5 @@
+#include <platform.h>
 #include "rom_loader.h"
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 
