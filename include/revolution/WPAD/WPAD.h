@@ -28,6 +28,34 @@ typedef enum {
     WPAD_BUTTON_HOME = (1 << 15),
 } WPADButton;
 
+// Device types for PC
+typedef enum {
+    WPAD_DEV_CORE = 0,
+    WPAD_DEV_FREESTYLE = 1,
+    WPAD_DEV_CLASSIC = 2,
+    WPAD_DEV_FUTURE = 251,
+    WPAD_DEV_NOT_SUPPORTED = 252,
+    WPAD_DEV_NOT_FOUND = 253,
+    WPAD_DEV_NULL = 254,
+    WPAD_DEV_UNKNOWN = 255,
+} WPADDeviceType;
+
+// Callback type for PC
+typedef void (*WPADCallback)(s32 chan, s32 result);
+
+// WPAD Info structure for PC
+typedef struct WPADInfo {
+    BOOL dpd;
+    BOOL speaker;
+    BOOL attach;
+    BOOL lowBat;
+    BOOL nearempty;
+    u8 battery;
+    u8 led;
+    u8 protocol;
+    u8 firmware;
+} WPADInfo;
+
 // Simplified WPAD status for PC
 typedef struct WPADStatus {
     u32 button;

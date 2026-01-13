@@ -29,6 +29,7 @@ typedef SDL_ThreadFunction OSThreadFunc;
 #define OSSetThreadPriority(thread, prio) (TRUE)
 #define OSGetCurrentThread() SDL_ThreadID()
 #define OSIsThreadTerminated(thread) (FALSE)
+#define OSResumeThread(thread) (0)
 
 // Scheduler functions (no-ops on PC)
 #define OSDisableScheduler() (0)

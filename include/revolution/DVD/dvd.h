@@ -42,6 +42,10 @@ static inline const DVDDiskID* DVDGetCurrentDiskID(void) {
     return &id;
 }
 
+static inline s32 DVDGetCommandBlockStatus(const DVDCommandBlock* block) {
+    return 0; // Always return done/idle for PC
+}
+
 #else
 // Original Wii implementation
 #ifdef __cplusplus

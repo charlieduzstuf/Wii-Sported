@@ -13,6 +13,7 @@
 
 #ifdef PLATFORM_PC
 
+#include <platform.h>
 #include <string>
 #include <map>
 #include <vector>
