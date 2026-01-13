@@ -1,5 +1,11 @@
 #ifndef MSL_STDARG_H
 #define MSL_STDARG_H
+
+#ifdef PLATFORM_PC
+// PC: Use standard library stdarg
+#include <stdarg.h>
+#else
+// Wii: Use PowerPC-specific implementation
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -28,4 +34,6 @@ void* __va_arg(va_list argp, int type);
 #ifdef __cplusplus
 }
 #endif
+#endif // PLATFORM_PC
+
 #endif

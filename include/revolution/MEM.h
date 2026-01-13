@@ -1,5 +1,11 @@
 #ifndef RVL_SDK_PUBLIC_MEM_H
 #define RVL_SDK_PUBLIC_MEM_H
+
+#ifdef PLATFORM_PC
+// PC implementation - simplified memory manager
+#include <revolution/MEM/mem_pc.h>
+#else
+// Wii implementation
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -13,4 +19,6 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // PLATFORM_PC
+
+#endif // RVL_SDK_PUBLIC_MEM_H

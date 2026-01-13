@@ -2,6 +2,30 @@
 #define RVL_SDK_VI_H
 #include <types.h>
 
+#ifdef PLATFORM_PC
+// PC video interface using SDL2
+#include <SDL2/SDL.h>
+
+// Simplified VI for PC
+typedef void (*VIRetraceCallback)(u32 retraceCount);
+
+// VI functions mapped to SDL2
+void VIInit(void);
+void VIWaitForRetrace(void);
+void VIFlush(void);
+void VISetBlack(BOOL black);
+s32 VIGetRetraceCount(void);
+
+#define VIConfigure(rmo) ((void)0)
+#define VIConfigurePan(x, y, w, h) ((void)0)
+#define VISetNextFrameBuffer(fb) ((void)0)
+#define VIGetCurrentFrameBuffer() (NULL)
+#define VIGetDTVStatus() (0)
+#define VISetPreRetraceCallback(cb) (NULL)
+#define VISetPostRetraceCallback(cb) (NULL)
+
+#else
+// Original Wii implementation
 #include <revolution/GX.h>
 #ifdef __cplusplus
 extern "C" {
@@ -83,4 +107,6 @@ u32 VIGetDTVStatus(void);
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // Wii implementation
+
+#endif // RVL_SDK_VI_H

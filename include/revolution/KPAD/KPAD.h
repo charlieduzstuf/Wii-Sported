@@ -2,6 +2,66 @@
 #define RVL_SDK_KPAD_H
 #include <types.h>
 
+#ifdef PLATFORM_PC
+// PC implementation - Extended KPAD mapped to mouse/keyboard
+#include <SDL2/SDL.h>
+#include <revolution/MTX.h>
+
+#define KPAD_MAX_SAMPLES 16
+
+typedef union KPADEXStatus {
+    struct {
+        Vec2 stick;
+        Vec acc;
+        f32 acc_value;
+        f32 acc_speed;
+    } fs;
+    struct {
+        u32 hold;
+        u32 trig;
+        u32 release;
+        Vec2 lstick;
+        Vec2 rstick;
+        f32 ltrigger;
+        f32 rtrigger;
+    } cl;
+} KPADEXStatus;
+
+typedef struct KPADStatus {
+    u32 hold;
+    u32 trig;
+    u32 release;
+    Vec acc;
+    f32 acc_value;
+    f32 acc_speed;
+    Vec2 pos;
+    Vec2 vec;
+    f32 speed;
+    Vec2 horizon;
+    Vec2 hori_vec;
+    f32 hori_speed;
+    f32 dist;
+    f32 dist_vec;
+    f32 dist_speed;
+    Vec2 acc_vertical;
+    u8 dev_type;
+    s8 wpad_err;
+    s8 dpd_valid_fg;
+    u8 data_format;
+    KPADEXStatus ex_status;
+} KPADStatus;
+
+// PC implementations
+void KPADInit(void);
+s32 KPADRead(s32 chan, KPADStatus* pSamples, s32 numSamples);
+#define KPADSetBtnRepeat(chan, a, b) ((void)0)
+#define KPADSetPosParam(chan, radius, sens) ((void)0)
+#define KPADSetHoriParam(chan, radius, sens) ((void)0)
+#define KPADSetDistParam(chan, radius, sens) ((void)0)
+#define KPADSetAccParam(chan, radius, sens) ((void)0)
+
+#else
+// Original Wii implementation
 #include <revolution/MTX.h>
 #ifdef __cplusplus
 extern "C" {
@@ -66,4 +126,7 @@ void KPADInit(void);
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // Wii implementation
+
+#endif // RVL_SDK_KPAD_H
+

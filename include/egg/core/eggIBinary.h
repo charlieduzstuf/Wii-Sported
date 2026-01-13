@@ -1,7 +1,7 @@
 #ifndef EGG_CORE_IBINARY_H
 #define EGG_CORE_IBINARY_H
 #include "types_egg.h"
-#include "eggAssert.h"
+#include "prim/eggAssert.h"
 
 namespace EGG
 {

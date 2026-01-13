@@ -2,10 +2,29 @@
 #define RVL_SDK_OS_TIME_H
 #include <types.h>
 
+#ifdef PLATFORM_PC
+// PC implementation using SDL2 or chrono
+#include <SDL2/SDL.h>
+#define OS_TIME_SPEED 1000000ULL  // 1 MHz for PC
+
+// OS time -> Real time (PC uses microseconds)
+#define OS_TICKS_TO_SEC(x) ((x) / OS_TIME_SPEED)
+#define OS_TICKS_TO_MSEC(x) ((x) / 1000)
+#define OS_TICKS_TO_USEC(x) (x)
+#define OS_TICKS_TO_NSEC(x) ((x) * 1000)
+
+// Real time -> OS time
+#define OS_SEC_TO_TICKS(x) ((x) * OS_TIME_SPEED)
+#define OS_MSEC_TO_TICKS(x) ((x) * 1000)
+#define OS_USEC_TO_TICKS(x) (x)
+#define OS_NSEC_TO_TICKS(x) ((x) / 1000)
+
+// Interpret as signed to find tick delta  
+#define OS_TICKS_DELTA(x, y) ((s32)x - (s32)y)
+
+#else
+// Wii implementation
 #include <revolution/OS/OSHardware.h>
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 // Time base frequency = 1/4 bus clock
 #define OS_TIME_SPEED (OS_BUS_CLOCK_SPEED / 4)
@@ -24,6 +43,7 @@ extern "C" {
 
 // Interpret as signed to find tick delta
 #define OS_TICKS_DELTA(x, y) ((s32)x - (s32)y)
+#endif
 
 typedef struct OSCalendarTime {
     s32 sec;   // at 0x0
@@ -37,6 +57,10 @@ typedef struct OSCalendarTime {
     s32 msec;  // at 0x20
     s32 usec;  // at 0x24
 } OSCalendarTime;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 s64 OSGetTime(void);
 u32 OSGetTick(void);
