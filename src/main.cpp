@@ -1,11 +1,11 @@
+#include <Pack/RPSystem.h>
+
 #ifdef PLATFORM_PC
+    #include <platform.h>
     #include <cstdio>
     #include <cstdarg>
-    #include <SDL2/SDL.h>
     #include <SDL2/SDL_opengl.h>
 #endif
-
-#include <Pack/RPSystem.h>
 
 #ifdef PLATFORM_PC
     

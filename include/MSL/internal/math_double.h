@@ -2,6 +2,9 @@
 #define MSL_MATH_DOUBLE_H
 #include <types.h>
 
+#ifndef PLATFORM_PC
+// Only define these for Wii builds - PC uses standard library math functions
+
 #include <internal/fdlibm_public.h>
 #ifdef __cplusplus
 extern "C" {
@@ -57,4 +60,6 @@ float fabsf(float x);
 #ifdef __cplusplus
 }
 #endif
+
+#endif // !PLATFORM_PC
 #endif

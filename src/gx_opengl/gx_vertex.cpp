@@ -2,8 +2,12 @@
 
 #include "gx_vertex.h"
 #include <SDL2/SDL_opengl.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
+
+using std::malloc;
+using std::free;
+using std::memset;
 
 static GX_VertexFormat currentFormat = {0};
 static GXPrimitive currentPrimitive;

@@ -5,10 +5,19 @@
 #ifdef PLATFORM_PC
 
 #include "pc_asset_loader.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <sys/stat.h>
+
+using std::fopen;
+using std::fclose;
+using std::fseek;
+using std::ftell;
+using std::fread;
+using std::malloc;
+using std::free;
+using std::memcpy;
 
 namespace PCAssets {
 

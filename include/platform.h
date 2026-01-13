@@ -8,7 +8,12 @@
 
 #ifdef PLATFORM_PC
 
-// Include SDL2 first (which may include Windows headers on Windows)
+// Include standard library headers first to get FILE, SEEK_SET, etc.
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+// Include SDL2 (which may include Windows headers on Windows)
 #include <SDL2/SDL.h>
 
 // Fix Windows macro conflicts that break C++ standard library

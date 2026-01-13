@@ -6,6 +6,8 @@
 // PC implementation - Wii Remote mapped to mouse/keyboard
 #include <SDL2/SDL.h>
 
+#define WPAD_MAX_DPD_OBJECTS 4
+
 // WPAD channels
 typedef enum {
     WPAD_CHAN0, WPAD_CHAN1, WPAD_CHAN2, WPAD_CHAN3,
@@ -40,8 +42,19 @@ typedef enum {
     WPAD_DEV_UNKNOWN = 255,
 } WPADDeviceType;
 
-// Callback type for PC
+// Callback types for PC
 typedef void (*WPADCallback)(s32 chan, s32 result);
+typedef void (*WPADSamplingCallback)(s32 chan);
+typedef void (*WPADConnectCallback)(s32 chan, s32 result);
+typedef void (*WPADExtensionCallback)(s32 chan, s32 dev);
+
+// DPD Object for PC
+typedef struct DPDObject {
+    s16 x;      // at 0x0
+    s16 y;      // at 0x2
+    u16 size;   // at 0x4
+    u8 traceId; // at 0x6
+} DPDObject;
 
 // WPAD Info structure for PC
 typedef struct WPADInfo {
@@ -58,12 +71,60 @@ typedef struct WPADInfo {
 
 // Simplified WPAD status for PC
 typedef struct WPADStatus {
-    u32 button;
-    Vec acc;
-    f32 roll;
-    f32 pitch;
-    Vec2 dpd[4];
+    u16 button;                          // at 0x0
+    s16 accX;                            // at 0x2
+    s16 accY;                            // at 0x4
+    s16 accZ;                            // at 0x6
+    DPDObject obj[WPAD_MAX_DPD_OBJECTS]; // at 0x8
+    u8 dev;                              // at 0x28
+    s8 err;                              // at 0x29
 } WPADStatus;
+
+// Extended WPAD status for PC
+typedef struct WPADStatusEx {
+    u16 button;
+    s16 accX;
+    s16 accY;
+    s16 accZ;
+    DPDObject obj[WPAD_MAX_DPD_OBJECTS];
+    u8 dev;
+    s8 err;
+    u8 padding[32];  // Placeholder for extended data
+} WPADStatusEx;
+
+// Freestyle status for PC
+typedef struct WPADFSStatus {
+    u16 button;
+    s16 accX;
+    s16 accY;
+    s16 accZ;
+    DPDObject obj[WPAD_MAX_DPD_OBJECTS];
+    u8 dev;
+    s8 err;
+    s16 fsAccX;
+    s16 fsAccY;
+    s16 fsAccZ;
+    s8 fsStickX;
+    s8 fsStickY;
+} WPADFSStatus;
+
+// Classic Controller status for PC
+typedef struct WPADCLStatus {
+    u16 button;
+    s16 accX;
+    s16 accY;
+    s16 accZ;
+    DPDObject obj[WPAD_MAX_DPD_OBJECTS];
+    u8 dev;
+    s8 err;
+    u16 clButton;
+    s16 clLStickX;
+    s16 clLStickY;
+    s16 clRStickX;
+    s16 clRStickY;
+    u8 clTriggerL;
+    u8 clTriggerR;
+} WPADCLStatus;
 
 // WPAD address length constant
 #define WPAD_ADDR_LEN 6

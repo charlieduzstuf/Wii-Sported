@@ -2,7 +2,11 @@
 
 #include <revolution/GX/GX_pc.h>
 #include <SDL2/SDL_opengl.h>
-#include <string.h>
+#include <cstdint>
+#include <cstring>
+
+using std::uint8_t;
+using std::uint32_t;
 
 // Matrix stack for position/normal matrices
 static float positionMatrices[10][3][4];

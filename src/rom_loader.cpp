@@ -1,7 +1,21 @@
 #include "rom_loader.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+using std::fopen;
+using std::fclose;
+using std::fseek;
+using std::ftell;
+using std::fread;
+using std::fprintf;
+using std::printf;
+using std::malloc;
+using std::free;
+using std::calloc;
+using std::memset;
+using std::memcpy;
+using std::strdup;
 
 // Global ROM loader instance
 ROMLoader g_romLoader = {0};
