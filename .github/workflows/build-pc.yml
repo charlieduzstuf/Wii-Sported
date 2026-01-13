@@ -40,7 +40,7 @@ jobs:
         ./vcpkg/vcpkg install sdl2:x64-windows
         ./vcpkg/vcpkg list
     - name: Configure
-      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release "-DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake"
     - name: Build
       run: cmake --build build --config Release
     - name: Upload Artifact

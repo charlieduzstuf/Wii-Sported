@@ -1,10 +1,13 @@
+#ifdef PLATFORM_PC
+    #include <cstdio>
+    #include <cstdarg>
+    #include <SDL2/SDL.h>
+    #include <SDL2/SDL_opengl.h>
+#endif
+
 #include <Pack/RPSystem.h>
 
 #ifdef PLATFORM_PC
-    #include <SDL2/SDL.h>
-    #include <SDL2/SDL_opengl.h>
-    #include <cstdio>
-    #include <cstdarg>
     
     // PC-compatible OSReport
     void OSReport(const char* msg, ...) {
