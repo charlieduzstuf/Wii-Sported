@@ -1,6 +1,7 @@
 #ifdef PLATFORM_PC
     #include <platform.h>
     #include <cstdarg>
+    #include <cstdio>
     #include <SDL2/SDL_opengl.h>
 #endif
 

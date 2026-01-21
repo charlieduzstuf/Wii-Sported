@@ -1,5 +1,11 @@
 #ifndef MSL_CPP_CMATH_H
 #define MSL_CPP_CMATH_H
+
+#ifdef PLATFORM_PC
+// PC platform - use standard C++ cmath
+#include <cmath>
+#else
+// Original Wii platform - use CodeWarrior's math.h
 #include <math.h>
 #ifdef __cplusplus
 
@@ -55,4 +61,5 @@ inline float fabs(float x) {
 } // namespace std
 
 #endif
-#endif
+#endif // PLATFORM_PC
+#endif // MSL_CPP_CMATH_H
