@@ -45,6 +45,48 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install pyyaml
 
+      # Create mock ROM structure for CI validation
+      # Note: Real builds require an actual Wii Sports ROM
+      - name: Setup mock ROM structure
+        run: |
+          mkdir -p orig/RSPE01_01/sys
+          # Create a minimal mock DOL file (56 bytes header minimum)
+          # This allows the build system to validate but won't produce a functional build
+          python3 -c "
+          import struct
+          # DOL header format - simplified mock
+          with open('orig/RSPE01_01/sys/main.dol', 'wb') as f:
+              # Write minimal DOL header (0x100 bytes)
+              # Text section offsets (7 entries)
+              for i in range(7):
+                  f.write(struct.pack('>I', 0x100))
+              # Data section offsets (11 entries)  
+              for i in range(11):
+                  f.write(struct.pack('>I', 0x100))
+              # Text section addresses (7 entries)
+              for i in range(7):
+                  f.write(struct.pack('>I', 0x80003100))
+              # Data section addresses (11 entries)
+              for i in range(11):
+                  f.write(struct.pack('>I', 0x80003100))
+              # Text section sizes (7 entries)
+              for i in range(7):
+                  f.write(struct.pack('>I', 0))
+              # Data section sizes (11 entries)
+              for i in range(11):
+                  f.write(struct.pack('>I', 0))
+              # BSS address
+              f.write(struct.pack('>I', 0x80003100))
+              # BSS size
+              f.write(struct.pack('>I', 0))
+              # Entry point
+              f.write(struct.pack('>I', 0x80003100))
+              # Pad to 0x100
+              f.write(b'\\x00' * (0x100 - f.tell()))
+          "
+          echo "Mock ROM structure created for CI validation"
+          echo "Note: Actual Wii Sports ROM required for real builds"
+
       # Restore cached files
       - name: Cache build
         uses: actions/cache@v4
