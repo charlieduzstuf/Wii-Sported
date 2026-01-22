@@ -1,7 +1,5 @@
 // Include platform-specific headers first
 #ifdef PLATFORM_PC
-    #include <cstdarg>
-    #include <cstdio>
     #include <platform.h>
     #include <SDL2/SDL_opengl.h>
 #endif
