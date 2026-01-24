@@ -1,50 +1,79 @@
-name: Build PC Port
+name: Build PC Executable
 
 on:
   push:
-    branches: [ copilot/port-code-to-windows-pc ]
   pull_request:
-    branches: [ copilot/port-code-to-windows-pc ]
 
 jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    
     - name: Install Dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake build-essential libsdl2-dev libgl1-mesa-dev
-    - name: Configure
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
-    - name: Build
-      run: cmake --build build --config Release
-    - name: Upload Artifact
+      run: sudo apt-get update && sudo apt-get install -y cmake build-essential libsdl2-dev libgl1-mesa-dev pkg-config
+    
+    - name: Configure CMake
+      run: |
+        echo "=== Configuring PC Build ==="
+        echo "This builds the PC port framework that compiles the game when given a ROM"
+        cmake -B build -DCMAKE_BUILD_TYPE=Release
+    
+    - name: Build PC Framework
+      run: |
+        echo "=== Building PC Executable Framework ==="
+        echo "Note: Full game requires Wii Sports ROM at build time"
+        echo "ROM integration happens during CMake build process"
+        cmake --build build --config Release
+        echo ""
+        echo "✅ PC framework built successfully"
+        echo "To build with ROM: Place ROM in orig/RSPE01_01/ and rebuild"
+    
+    - name: Upload Linux Build
       uses: actions/upload-artifact@v4
       with:
         name: WiiSportsPC-Linux
         path: build/bin/WiiSports
+      if: success()
 
   build-windows:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    
     - name: Setup MSVC
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
+    
     - name: Install vcpkg
       run: |
         git clone https://github.com/Microsoft/vcpkg.git
         cd vcpkg
         ./bootstrap-vcpkg.bat
         cd ..
+    
     - name: Install SDL2 via vcpkg
       run: |
         ./vcpkg/vcpkg install sdl2:x64-windows
-        ./vcpkg/vcpkg list
-    - name: Configure
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Release "-DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake"
-    - name: Build
-      run: cmake --build build --config Release
-    - name: Upload Artifact
+    
+    - name: Configure CMake
+      run: |
+        Write-Host "=== Configuring PC Build ==="
+        Write-Host "This builds the PC port framework that compiles the game when given a ROM"
+        cmake -B build -DCMAKE_BUILD_TYPE=Release "-DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    
+    - name: Build PC Framework
+      run: |
+        Write-Host "=== Building PC Executable Framework ==="
+        Write-Host "Note: Full game requires Wii Sports ROM at build time"
+        Write-Host "ROM integration happens during CMake build process"
+        cmake --build build --config Release
+        Write-Host ""
+        Write-Host "✅ PC framework built successfully"
+        Write-Host "To build with ROM: Place ROM in orig/RSPE01_01/ and rebuild"
+    
+    - name: Upload Windows Build
       uses: actions/upload-artifact@v4
       with:
         name: WiiSportsPC-Windows
         path: build/bin/Release/WiiSports.exe
+      if: success()

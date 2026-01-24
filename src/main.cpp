@@ -1,9 +1,10 @@
+// Include platform-specific headers first
 #ifdef PLATFORM_PC
     #include <platform.h>
-    #include <cstdarg>
     #include <SDL2/SDL_opengl.h>
 #endif
 
+// Include game headers
 #include <Pack/RPSystem.h>
 
 #ifdef PLATFORM_PC

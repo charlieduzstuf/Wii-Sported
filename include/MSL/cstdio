@@ -1,5 +1,11 @@
 #ifndef MSL_CPP_CSTDIO_H
 #define MSL_CPP_CSTDIO_H
+
+#ifdef PLATFORM_PC
+// PC platform - use standard C++ cstdio
+#include <cstdio>
+#else
+// Original Wii platform - use C stdio.h
 #include <stdio.h>
 #ifdef __cplusplus
 
@@ -18,4 +24,5 @@ using ::vsprintf;
 } // namespace std
 
 #endif
-#endif
+#endif // PLATFORM_PC
+#endif // MSL_CPP_CSTDIO_H

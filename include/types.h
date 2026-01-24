@@ -15,6 +15,11 @@
 #include <lang.h>
 #include <macros.h>
 
+// Fix Windows MSVC std::byte conflict in C++17
+#if defined(_MSC_VER) && defined(__cplusplus) && __cplusplus >= 201703L
+    #define byte byte_type
+#endif
+
 typedef unsigned long long u64;
 typedef signed long long s64;
 

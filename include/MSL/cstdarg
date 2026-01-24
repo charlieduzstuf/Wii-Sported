@@ -1,5 +1,11 @@
 #ifndef MSL_CPP_CSTDARG_H
 #define MSL_CPP_CSTDARG_H
+
+#ifdef PLATFORM_PC
+// PC platform - use standard C++ cstdarg
+#include <cstdarg>
+#else
+// Original Wii platform - use C stdarg.h
 #include <stdarg.h>
 #ifdef __cplusplus
 
@@ -8,4 +14,5 @@ using ::va_list;
 } // namespace std
 
 #endif
-#endif
+#endif // PLATFORM_PC
+#endif // MSL_CPP_CSTDARG_H
