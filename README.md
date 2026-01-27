@@ -14,7 +14,9 @@
 [<img src="https://decomp.dev/doldecomp/ogws.svg?w=512&h=256" width="512" height="256" alt="A visual">][Progress]
 <!-- markdownlint-enable MD033 -->
 
-A work-in-progress decompilation of Wii Sports.
+A work-in-progress decompilation of Wii Sports with PC port support.
+
+**Want to play on PC?** See the [Quick Start Guide](QUICKSTART.md) for a 3-step build process!
 
 > [!IMPORTANT]
 > This repository does **not** contain any game assets or assembly whatsoever.
@@ -27,6 +29,29 @@ Supported versions:
 | US (Revision 1) | `8bb422971b88b5551a37de98db69557df7b46637` |
 
 ## Getting Started
+
+### Building the PC Executable
+
+This repository provides a simple way to build a PC executable from your ROM:
+
+```bash
+# 1. Clone this repository
+git clone https://github.com/charlieduzstuf/Wii-Sported.git
+cd Wii-Sported
+
+# 2. Run the builder with your ROM
+python build_from_rom.py --rom /path/to/your/wii_sports.iso
+
+# 3. Extract assets (one-time)
+python asset_extractor.py --rom /path/to/your/wii_sports.iso
+
+# 4. Run the game!
+./WiiSports_PC_Build/WiiSports
+```
+
+**For detailed instructions**, see the [User Guide](USER_GUIDE.md).
+
+### Original Wii Build
 
 Once you have confirmed that your copy of the game is a supported version,
 please dump your copy and follow the build instructions in [this document](docs/getting_started.md).

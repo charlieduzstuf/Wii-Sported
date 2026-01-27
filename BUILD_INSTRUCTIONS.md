@@ -1,6 +1,22 @@
 # Wii Sports PC Port - Build Instructions
 
-## Important: ROM Required At Compile Time
+## NEW: Simplified Build Process
+
+We now provide an easy-to-use builder script that handles everything for you!
+
+### Quick Build (Recommended)
+
+```bash
+python build_from_rom.py --rom /path/to/your/wii_sports.iso
+```
+
+See [USER_GUIDE.md](USER_GUIDE.md) for detailed instructions.
+
+---
+
+## Advanced: Manual Build Instructions
+
+### Important: ROM Required At Compile Time
 
 **This is a semi-complete decompilation.** The ROM contains binary PowerPC code that has NOT been decompiled yet.
 
