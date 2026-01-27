@@ -16,18 +16,19 @@ jobs:
     - name: Configure CMake
       run: |
         echo "=== Configuring PC Build ==="
-        echo "This builds the PC port framework that compiles the game when given a ROM"
+        echo "This builds the decompiled code framework"
+        echo "Users can use build_from_rom.py to build the complete game with their ROM"
         cmake -B build -DCMAKE_BUILD_TYPE=Release
     
     - name: Build PC Framework
       run: |
         echo "=== Building PC Executable Framework ==="
-        echo "Note: Full game requires Wii Sports ROM at build time"
-        echo "ROM integration happens during CMake build process"
+        echo "Note: This builds only the decompiled portions (~30% of game)"
+        echo "For complete build: python build_from_rom.py --rom <your_rom.iso>"
         cmake --build build --config Release
         echo ""
         echo "✅ PC framework built successfully"
-        echo "To build with ROM: Place ROM in orig/RSPE01_01/ and rebuild"
+        echo "Users: Use build_from_rom.py to build the full game"
     
     - name: Upload Linux Build
       uses: actions/upload-artifact@v4
@@ -58,18 +59,19 @@ jobs:
     - name: Configure CMake
       run: |
         Write-Host "=== Configuring PC Build ==="
-        Write-Host "This builds the PC port framework that compiles the game when given a ROM"
+        Write-Host "This builds the decompiled code framework"
+        Write-Host "Users can use build_from_rom.py to build the complete game with their ROM"
         cmake -B build -DCMAKE_BUILD_TYPE=Release "-DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake"
     
     - name: Build PC Framework
       run: |
         Write-Host "=== Building PC Executable Framework ==="
-        Write-Host "Note: Full game requires Wii Sports ROM at build time"
-        Write-Host "ROM integration happens during CMake build process"
+        Write-Host "Note: This builds only the decompiled portions (~30% of game)"
+        Write-Host "For complete build: python build_from_rom.py --rom <your_rom.iso>"
         cmake --build build --config Release
         Write-Host ""
         Write-Host "✅ PC framework built successfully"
-        Write-Host "To build with ROM: Place ROM in orig/RSPE01_01/ and rebuild"
+        Write-Host "Users: Use build_from_rom.py to build the full game"
     
     - name: Upload Windows Build
       uses: actions/upload-artifact@v4
