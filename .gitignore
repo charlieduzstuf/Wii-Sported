@@ -22,6 +22,12 @@ build/
 .ninja_*
 build.ninja
 
+# ROM builder output
+WiiSports_PC_Build/
+WiiSports_Build/
+pc_assets/
+temp_extract/
+
 # decompctx output
 ctx.*
 *.ctx
