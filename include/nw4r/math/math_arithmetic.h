@@ -30,6 +30,8 @@ f32 FLog(f32 x);
  ******************************************************************************/
 f32 FrSqrt(f32 x);
 
+#ifndef PLATFORM_PC
+// PowerPC implementation with assembly
 inline f32 FAbs(register f32 x) {
     register f32 ax;
 
@@ -39,6 +41,12 @@ inline f32 FAbs(register f32 x) {
 
     return ax;
 }
+#else
+// PC implementation
+inline f32 FAbs(f32 x) {
+    return fabsf(x);
+}
+#endif
 
 inline f32 FCeil(f32 x) {
 #ifdef PLATFORM_PC
@@ -60,6 +68,8 @@ inline f32 FFloor(f32 x) {
 #endif
 }
 
+#ifndef PLATFORM_PC
+// PowerPC implementation
 inline f32 FInv(register f32 x) {
     register f32 work0, work1, work2, work3;
 
@@ -75,6 +85,12 @@ inline f32 FInv(register f32 x) {
 
     return work0;
 }
+#else
+// PC implementation
+inline f32 FInv(f32 x) {
+    return 1.0f / x;
+}
+#endif
 
 inline f32 FMod(f32 x, f32 y) {
 #ifdef PLATFORM_PC
@@ -104,6 +120,8 @@ inline f32 FLog(f32 x) {
     return NW4R_MATH_QNAN;
 }
 
+#ifndef PLATFORM_PC
+// PowerPC implementation
 inline f32 FSelect(register f32 value, register f32 ge_zero,
                    register f32 lt_zero) {
     register f32 ret;
@@ -114,6 +132,12 @@ inline f32 FSelect(register f32 value, register f32 ge_zero,
 
     return ret;
 }
+#else
+// PC implementation
+inline f32 FSelect(f32 value, f32 ge_zero, f32 lt_zero) {
+    return value >= 0.0f ? ge_zero : lt_zero;
+}
+#endif
 
 /******************************************************************************
  *

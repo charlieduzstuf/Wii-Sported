@@ -87,7 +87,11 @@
 #define ALIGN(x) __attribute__((aligned(x)))
 
 // Place a symbol in a specific ELF section
+#ifdef PLATFORM_PC
+#define DECL_SECTION(x)  // No-op on PC
+#else
 #define DECL_SECTION(x) __declspec(section x)
+#endif
 
 // Give a symbol weak linkage
 #define DECL_WEAK __declspec(weak)

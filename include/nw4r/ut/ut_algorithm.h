@@ -28,6 +28,8 @@ template <typename T> inline T Abs(T x) {
     return x < 0 ? static_cast<T>(-x) : static_cast<T>(x);
 }
 
+#ifndef PLATFORM_PC
+// PowerPC implementation
 template <> f32 inline Abs(register f32 x) {
     register f32 ax;
 
@@ -37,6 +39,12 @@ template <> f32 inline Abs(register f32 x) {
 
     return ax;
 }
+#else
+// PC implementation
+template <> f32 inline Abs(f32 x) {
+    return fabsf(x);
+}
+#endif
 
 /******************************************************************************
  *

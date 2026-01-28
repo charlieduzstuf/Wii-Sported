@@ -313,6 +313,10 @@ VEC3* VEC3Maximize(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3Minimize(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3TransformNormal(VEC3* pOut, const MTX34* pMtx, const VEC3* pVec);
 
+#ifndef PLATFORM_PC
+// PowerPC-optimized inline functions with assembly
+// On PC, use the slower C implementations or PSVec functions instead
+
 inline VEC3* VEC3Add(register VEC3* pOut, register const VEC3* pA,
                      register const VEC3* pB) {
     register f32 work0, work1, work2;
@@ -439,6 +443,8 @@ inline VEC3* VEC3Sub(register VEC3* pOut, register const VEC3* pA,
 
     return pOut;
 }
+
+#endif // !PLATFORM_PC
 
 inline VEC3* VEC3Cross(VEC3* pOut, const VEC3* pA, const VEC3* pB) {
     PSVECCrossProduct(*pA, *pB, *pOut);
