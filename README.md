@@ -51,6 +51,8 @@ python asset_extractor.py --rom /path/to/your/wii_sports.iso
 
 **For detailed instructions**, see the [User Guide](USER_GUIDE.md).
 
+**Want to play online with friends?** See [Online Multiplayer Guide](docs/ONLINE_MULTIPLAYER.md) for WiiOTN integration.
+
 ### Original Wii Build
 
 Once you have confirmed that your copy of the game is a supported version,

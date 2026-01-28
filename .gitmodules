@@ -1,0 +1,3 @@
+[submodule "external/wii-otn"]
+	path = external/wii-otn
+	url = https://github.com/Identityofsine/wii-otn.git
