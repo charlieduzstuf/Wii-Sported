@@ -93,6 +93,7 @@ include_directories(
 # PC implementation sources
 set(PC_SOURCES
     src/revolution/OS/OSTime.c
+    src/revolution/OS/OSHardware_pc.c
     src/revolution/PAD/Pad_pc.cpp
     src/revolution/WPAD/WPAD_pc.cpp
     src/revolution/KPAD/KPAD_pc.cpp
