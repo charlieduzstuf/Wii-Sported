@@ -1,16 +1,19 @@
 #ifndef RVL_SDK_PAD_H
 #define RVL_SDK_PAD_H
 
-// Include types.h BEFORE extern "C" to avoid C++ header issues
+// Include types.h and SDL2 BEFORE extern "C" to avoid C++ header issues
 #include <types.h>
+
+#ifdef PLATFORM_PC
+// PC gamepad/keyboard input using SDL2 (must be outside extern "C")
+#include <SDL2/SDL.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #ifdef PLATFORM_PC
-// PC gamepad/keyboard input using SDL2
-#include <SDL2/SDL.h>
 
 typedef enum {
     PAD_BUTTON_LEFT = (1 << 0),
@@ -84,6 +87,10 @@ BOOL __PADDisableRecalibration(BOOL disable);
 }
 #endif
 #endif // Wii implementation
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // RVL_SDK_PAD_H
 
