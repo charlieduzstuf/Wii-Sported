@@ -5,7 +5,7 @@
 #include <nw4r/g3d/res/g3d_resanm.h>
 #include <nw4r/g3d/res/g3d_rescommon.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 #include <nw4r/ut.h>
 
 #include <revolution/GX.h>

@@ -1,6 +1,6 @@
 #include <Pack/RPGraphics.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 #include <revolution/GX.h>
 

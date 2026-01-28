@@ -67,5 +67,18 @@ static inline void MEMFreeToFrmHeap(void* heap, void* memBlock) {
     free(memBlock);
 }
 
+// Allocator base class stub for PC
+class MEMAllocator {
+public:
+    virtual ~MEMAllocator() {}
+    virtual void* alloc(u32 size) = 0;
+    virtual void free(void* ptr) = 0;
+};
+
+// Heap utility functions
+static inline void* MEMGetHeapEndAddress(MEMiHeapHead* heap) {
+    return heap ? heap->end : NULL;
+}
+
 #endif // PLATFORM_PC
 #endif // PLATFORM_PC_MEM_H

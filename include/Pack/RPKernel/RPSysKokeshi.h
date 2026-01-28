@@ -5,7 +5,7 @@
 #include <Pack/RPGraphics.h>
 #include <Pack/RPKernel/RPSysAvatar.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 //! @addtogroup rp_kernel
 //! @{

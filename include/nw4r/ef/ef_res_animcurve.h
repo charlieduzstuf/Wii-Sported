@@ -2,7 +2,7 @@
 #define NW4R_EF_RES_ANIM_CURVE_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #define NW4R_EF_MAGIC_ANIMCURVE 0xAC
 #define NW4R_EF_MAGIC_ANIMBAKED 0xAB

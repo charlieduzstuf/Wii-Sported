@@ -1,9 +1,9 @@
 #include <Pack/RPKernel.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 #include <nw4r/lyt.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 #include <nw4r/ut.h>
 
 const f32* RPSysLytDynamicAnm::lbl_804BF588 = NULL;

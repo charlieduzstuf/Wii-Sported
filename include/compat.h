@@ -64,8 +64,12 @@
 // decltype
 #define DECLTYPE(x) __decltype__(x)
 
-// Place a symbol at a specific address
+// Place a symbol at a specific address (Wii hardware only)
+#ifdef PLATFORM_PC
+#define DECL_ADDRESS(addr)  // No-op on PC
+#else
 #define DECL_ADDRESS(addr) : addr
+#endif
 
 // Allow flexible arrays
 #define FLEXIBLE_ARRAY(NAME) NAME[]

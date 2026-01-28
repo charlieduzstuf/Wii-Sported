@@ -5,6 +5,10 @@
 #include <revolution/DVD/dvd.h>
 
 #include <revolution/OS.h>
+
+// Forward declaration in case of include order issues
+typedef void (*DVDAsyncCallback)(s32 result, struct DVDFileInfo* info);
+
 #ifdef __cplusplus
 extern "C" {
 #endif

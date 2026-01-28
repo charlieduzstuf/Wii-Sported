@@ -2,7 +2,7 @@
 #define NW4R_EF_TYPES_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #define NW4R_EF_MAX_EMITTER 1024
 #define NW4R_EF_MAX_EFFECT 1024

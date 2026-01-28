@@ -6,7 +6,7 @@
 #include "types_egg.h"
 
 #include <nw4r/g3d.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #define CALC_BEFORE_FUNC(x) void calc_before_##x()
 #define CALC_AFTER_FUNC(x) void calc_after_##x()

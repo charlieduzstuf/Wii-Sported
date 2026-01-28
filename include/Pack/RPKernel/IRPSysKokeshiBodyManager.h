@@ -4,7 +4,7 @@
 
 #include <RVLFaceLib.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 
 //! @addtogroup rp_kernel

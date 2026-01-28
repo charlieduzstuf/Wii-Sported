@@ -2,7 +2,7 @@
 #define NW4R_LYT_DRAW_INFO_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 #include <nw4r/ut.h>
 
 namespace nw4r {

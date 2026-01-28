@@ -78,21 +78,22 @@ endif()
 
 find_package(OpenGL REQUIRED)
 
-# Include directories
+# Include directories  
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/include/MSL
     ${CMAKE_SOURCE_DIR}/include/revolution
     ${CMAKE_SOURCE_DIR}/include/nw4r
     ${CMAKE_SOURCE_DIR}/include/egg
     ${CMAKE_SOURCE_DIR}/include/Pack
     ${CMAKE_SOURCE_DIR}/src/gx_opengl
     ${SDL2_INCLUDE_DIRS}
+    ${OPENGL_INCLUDE_DIR}
 )
 
 # PC implementation sources
 set(PC_SOURCES
     src/revolution/OS/OSTime.c
+    src/revolution/OS/OSHardware_pc.c
     src/revolution/PAD/Pad_pc.cpp
     src/revolution/WPAD/WPAD_pc.cpp
     src/revolution/KPAD/KPAD_pc.cpp

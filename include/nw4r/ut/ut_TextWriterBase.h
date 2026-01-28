@@ -5,7 +5,7 @@
 #include <nw4r/ut/ut_CharWriter.h>
 #include <nw4r/ut/ut_TagProcessorBase.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #include <cstdio>
 #include <cwchar>

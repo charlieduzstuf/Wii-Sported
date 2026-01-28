@@ -6,7 +6,7 @@
 #include <nw4r/ef/ef_particle.h>
 #include <nw4r/ef/ef_particlemanager.h>
 #include <nw4r/ef/ef_types.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #include <revolution/GX.h>
 

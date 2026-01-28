@@ -6,7 +6,7 @@
 #include <nw4r/snd/snd_InstancePool.h>
 #include <nw4r/snd/snd_SoundArchive.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 namespace nw4r {
 namespace snd {

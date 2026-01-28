@@ -1,6 +1,11 @@
 #ifndef RVL_SDK_OS_PPC_EABI_INIT_H
 #define RVL_SDK_OS_PPC_EABI_INIT_H
 #include <types.h>
+
+#ifndef PLATFORM_PC
+// This file contains PowerPC EABI initialization code
+// Not needed on PC
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -89,4 +94,7 @@ DECL_SECTION(".init") extern const ExtabIndexInfo _eti_init_info[];
 #ifdef __cplusplus
 }
 #endif
+
+#endif // !PLATFORM_PC
+
 #endif

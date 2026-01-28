@@ -66,7 +66,13 @@
 #define LENGTHOF(x) ARRAY_SIZE(x)
 
 // Declare an array of hardware registers
+#ifdef PLATFORM_PC
+// On PC, declare as extern (defined in OSHardware_pc.c)
+#define DECL_HW_REGS(NAME) extern NAME##_HW_REGS[]
+#else
+// On Wii, use flexible array syntax
 #define DECL_HW_REGS(NAME) FLEXIBLE_ARRAY(NAME##_HW_REGS)
+#endif
 
 /******************************************************************************
  *
@@ -87,9 +93,19 @@
 #define ALIGN(x) __attribute__((aligned(x)))
 
 // Place a symbol in a specific ELF section
+#ifdef PLATFORM_PC
+#define DECL_SECTION(x)  // No-op on PC
+#else
 #define DECL_SECTION(x) __declspec(section x)
+#endif
 
 // Give a symbol weak linkage
+#ifdef _MSC_VER
 #define DECL_WEAK __declspec(weak)
+#elif defined(__GNUC__) || defined(__clang__)
+#define DECL_WEAK __attribute__((weak))
+#else
+#define DECL_WEAK
+#endif
 
 #endif

@@ -4,7 +4,7 @@
 
 #include <nw4r/ef/ef_types.h>
 #include <nw4r/ef/emform/ef_emform.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #include <revolution/GX.h>
 

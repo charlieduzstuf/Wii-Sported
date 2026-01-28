@@ -8,9 +8,23 @@
 #include "gx_state.h"
 #include <SDL2/SDL_opengl.h>
 #include <string.h>
+#include <revolution/GX/GXHardware.h>
 
 // Global GX state
 GXRenderState g_gxState;
+
+// Define WGPIPE for PC - stub that does nothing
+// Actual GX commands are handled by the OpenGL translation layer
+volatile union {
+    char c;
+    unsigned char uc;
+    short s;
+    unsigned short us;
+    int i;
+    unsigned int ui;
+    void* p;
+    float f;
+} WGPIPE;
 
 void GX_InitState(void) {
     memset(&g_gxState, 0, sizeof(GXRenderState));

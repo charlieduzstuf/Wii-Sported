@@ -2,7 +2,7 @@
 #define RP_AUDIO_SND_UTILITY_H
 #include <Pack/types_pack.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 #include <nw4r/snd.h>
 
 //! @addtogroup rp_audio

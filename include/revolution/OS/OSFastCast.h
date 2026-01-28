@@ -10,6 +10,9 @@ extern "C" {
 #define OS_GQR_TYPE_S8 6
 #define OS_GQR_TYPE_S16 7
 
+#ifndef PLATFORM_PC
+// PowerPC implementation
+
 static void OSInitFastCast(void) {
     ASM (
         li r3, 4
@@ -158,6 +161,48 @@ static s16 __OSf32tos16(register f32 arg) {
 static void OSf32tos16(f32* in, volatile s16* out) {
     *out = __OSf32tos16(*in);
 }
+
+#else
+// PC implementation - use standard C conversions
+
+static inline void OSInitFastCast(void) {
+    // No-op on PC
+}
+
+static inline void OSSetGQR6(u32 type, u32 scale) {
+    // No-op on PC
+}
+
+static inline void OSSetGQR7(u32 type, u32 scale) {
+    // No-op on PC
+}
+
+// Conversion functions using standard C
+static inline void OSu8tof32(u8* in, volatile f32* out) {
+    *out = (f32)(*in);
+}
+
+static inline void OSu16tof32(u16* in, volatile f32* out) {
+    *out = (f32)(*in);
+}
+
+static inline void OSs16tof32(s16* in, volatile f32* out) {
+    *out = (f32)(*in);
+}
+
+static inline void OSf32tou8(f32* in, volatile u8* out) {
+    *out = (u8)(*in);
+}
+
+static inline void OSf32tou16(f32* in, volatile u16* out) {
+    *out = (u16)(*in);
+}
+
+static inline void OSf32tos16(f32* in, volatile s16* out) {
+    *out = (s16)(*in);
+}
+
+#endif // PLATFORM_PC
 
 #ifdef __cplusplus
 }

@@ -4,7 +4,7 @@
 
 #include <nw4r/ef/ef_linkedobject.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 #include <nw4r/ut.h>
 
 namespace nw4r {

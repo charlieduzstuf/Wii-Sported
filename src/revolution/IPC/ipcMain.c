@@ -1,6 +1,12 @@
 #include <revolution/IPC.h>
 #include <revolution/OS.h>
 
+#ifdef PLATFORM_PC
+// PC stub - IPC hardware registers not used on PC
+volatile u32 IPC_PPC_HW_REGS[256] = {0};
+volatile u32 IPC_HW_REGS[256] = {0};
+#endif
+
 static u8 Initialized = FALSE;
 static void* IPCCurrentBufferLo = NULL;
 static void* IPCCurrentBufferHi = NULL;
