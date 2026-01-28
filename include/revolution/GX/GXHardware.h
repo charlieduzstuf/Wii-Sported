@@ -31,6 +31,8 @@ extern "C" {
 /**
  * FIFO write/gather pipe
  */
+#ifndef PLATFORM_PC
+// Wii hardware address
 extern volatile union {
     // 1-byte
     char c;
@@ -44,6 +46,23 @@ extern volatile union {
     void* p;
     float f;
 } WGPIPE DECL_ADDRESS(0xCC008000);
+#else
+// PC implementation - stub for GX commands
+// Actual rendering is handled by gx_opengl implementation
+extern volatile union {
+    // 1-byte
+    char c;
+    unsigned char uc;
+    // 2-byte
+    short s;
+    unsigned short us;
+    // 4-byte
+    int i;
+    unsigned int ui;
+    void* p;
+    float f;
+} WGPIPE;
+#endif
 
 /**
  * FIFO commands

@@ -1,10 +1,8 @@
 name: Build PC Executable
 
-# NOTE: PC build temporarily disabled due to compilation issues
-# The decompiled codebase contains Wii-specific headers with PowerPC assembly
-# that cannot compile on x86-64. Re-enable by changing to 'on: push, pull_request'
 on:
-  workflow_dispatch:  # Manual trigger only
+  push:
+  pull_request:
 
 jobs:
   build-linux:

@@ -41,7 +41,11 @@ inline f32 FAbs(register f32 x) {
 }
 
 inline f32 FCeil(f32 x) {
+#ifdef PLATFORM_PC
+    return ceilf(x);
+#else
     return std::ceilf(x);
+#endif
 }
 
 inline f32 FExp(f32 x) {
@@ -49,7 +53,11 @@ inline f32 FExp(f32 x) {
 }
 
 inline f32 FFloor(f32 x) {
+#ifdef PLATFORM_PC
+    return floorf(x);
+#else
     return std::floorf(x);
+#endif
 }
 
 inline f32 FInv(register f32 x) {
@@ -69,11 +77,19 @@ inline f32 FInv(register f32 x) {
 }
 
 inline f32 FMod(f32 x, f32 y) {
+#ifdef PLATFORM_PC
+    return fmodf(x, y);
+#else
     return std::fmodf(x, y);
+#endif
 }
 
 inline f32 FModf(f32 x, f32* pY) {
+#ifdef PLATFORM_PC
+    return modff(x, pY);
+#else
     return std::modff(x, pY);
+#endif
 }
 
 inline f32 FSqrt(f32 x) {

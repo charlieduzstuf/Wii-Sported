@@ -65,7 +65,11 @@ inline f32 CosRad(f32 rad) {
  *
  ******************************************************************************/
 inline f32 TanFIdx(f32 fidx) {
+#ifdef PLATFORM_PC
+    return tanf(NW4R_MATH_FIDX_TO_RAD(fidx));
+#else
     return std::tanf(NW4R_MATH_FIDX_TO_RAD(fidx));
+#endif
 }
 inline f32 TanDeg(f32 deg) {
     return TanFIdx(NW4R_MATH_DEG_TO_FIDX(deg));

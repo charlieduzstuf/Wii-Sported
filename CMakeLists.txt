@@ -78,16 +78,16 @@ endif()
 
 find_package(OpenGL REQUIRED)
 
-# Include directories
+# Include directories  
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/include/MSL
     ${CMAKE_SOURCE_DIR}/include/revolution
     ${CMAKE_SOURCE_DIR}/include/nw4r
     ${CMAKE_SOURCE_DIR}/include/egg
     ${CMAKE_SOURCE_DIR}/include/Pack
     ${CMAKE_SOURCE_DIR}/src/gx_opengl
     ${SDL2_INCLUDE_DIRS}
+    ${OPENGL_INCLUDE_DIR}
 )
 
 # PC implementation sources

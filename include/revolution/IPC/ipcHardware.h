@@ -8,8 +8,15 @@ extern "C" {
 /**
  * IPC hardware registers
  */
+#ifndef PLATFORM_PC
+// Wii hardware addresses
 volatile u32 DECL_HW_REGS(IPC_PPC) DECL_ADDRESS(0xCD000000);
 volatile u32 DECL_HW_REGS(IPC) DECL_ADDRESS(0xCD800000);
+#else
+// PC stubs - not used on PC
+extern volatile u32 IPC_PPC_HW_REGS[];
+extern volatile u32 IPC_HW_REGS[];
+#endif
 
 /**
  * Hardware register indexes
