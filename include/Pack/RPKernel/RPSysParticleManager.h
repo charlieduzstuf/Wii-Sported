@@ -3,7 +3,7 @@
 #include <Pack/types_pack.h>
 
 #include <nw4r/ef.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 //! @addtogroup rp_kernel
 //! @{

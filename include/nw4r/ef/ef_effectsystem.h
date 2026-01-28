@@ -4,7 +4,7 @@
 
 #include <nw4r/ef/ef_creationqueue.h>
 #include <nw4r/ef/ef_random.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 namespace nw4r {
 namespace ef {

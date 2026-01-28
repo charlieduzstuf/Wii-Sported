@@ -1,7 +1,7 @@
 #include <Pack/RPKernel.h>
 
 #include <nw4r/lyt.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 #include <nw4r/ut.h>
 
 #include <revolution/GX.h>

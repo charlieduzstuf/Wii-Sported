@@ -1,5 +1,5 @@
 #include <nw4r/g3d.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 namespace nw4r {
 namespace g3d {

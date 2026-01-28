@@ -7,7 +7,7 @@
 #include <nw4r/g3d/res/g3d_respltt.h>
 #include <nw4r/g3d/res/g3d_restev.h>
 #include <nw4r/g3d/res/g3d_restex.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #include <revolution/GX.h>
 

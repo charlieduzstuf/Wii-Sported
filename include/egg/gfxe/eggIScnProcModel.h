@@ -2,7 +2,7 @@
 #define EGG_GFXE_I_SCN_PROC_MODEL_H
 #include <egg/types_egg.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 namespace EGG {
 

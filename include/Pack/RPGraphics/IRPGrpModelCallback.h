@@ -2,7 +2,7 @@
 #define RP_GRAPHICS_I_MODEL_CALLBACK_H
 #include <Pack/types_pack.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 //! @addtogroup rp_graphics
 //! @{

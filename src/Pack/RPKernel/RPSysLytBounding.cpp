@@ -1,10 +1,10 @@
 
 #include <Pack/RPKernel.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 #include <nw4r/lyt.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 /**
  * @brief Tests whether a point falls within this bounding pane

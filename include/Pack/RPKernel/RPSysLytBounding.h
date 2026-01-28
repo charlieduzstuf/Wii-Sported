@@ -2,7 +2,7 @@
 #define RP_KERNEL_LYT_BOUNDING_H
 #include <Pack/types_pack.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 #include <nw4r/lyt.h>
 

@@ -2,11 +2,11 @@
 #define EGG_GFXE_FRUSTUM_H
 #include <egg/types_egg.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 #include <egg/prim.h>
 
 #include <nw4r/g3d.h>
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #include <revolution/GX.h>
 

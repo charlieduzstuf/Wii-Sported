@@ -4,7 +4,7 @@
 
 #include <egg/core/eggSingleton.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 #include <egg/prim.h>
 
 #include <nw4r/ut.h>

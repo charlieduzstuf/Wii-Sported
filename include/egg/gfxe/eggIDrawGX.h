@@ -4,7 +4,7 @@
 
 #include <egg/prim.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 namespace EGG {
 

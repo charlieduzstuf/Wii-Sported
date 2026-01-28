@@ -6,7 +6,7 @@
 #include <nw4r/g3d/res/g3d_rescommon.h>
 #include <nw4r/g3d/res/g3d_resmdl.h>
 
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 namespace nw4r {
 namespace g3d {

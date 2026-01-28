@@ -5,7 +5,7 @@
 #include <Pack/RPKernel/RPSysLytDynamicAnm.h>
 
 #include <egg/core.h>
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 #include <nw4r/lyt.h>
 #include <nw4r/ut.h>

@@ -2,7 +2,7 @@
 #define RP_GRAPHICS_MODEL_RES_MANAGER_H
 #include <Pack/types_pack.h>
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 
 #include <nw4r/g3d.h>
 

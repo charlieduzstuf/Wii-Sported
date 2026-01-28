@@ -1,7 +1,7 @@
 // TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
-#include <egg/math.h>
+#include <egg/egg_math.h>
 #include <egg/prim.h>
 
 #include <cmath>

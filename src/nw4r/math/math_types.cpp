@@ -1,4 +1,4 @@
-#include <nw4r/math.h>
+#include <nw4r/nw4r_math.h>
 
 #define FSEL_MAX(_fx, _fy)                                                     \
     fx = (_fx);                                                                \
