@@ -53,8 +53,7 @@ using std::memcpy;
 using std::strcmp;
 using std::strlen;
 using std::va_list;
-using std::va_start;
-using std::va_end;
+// Note: va_start and va_end are macros, not functions, so no std:: version
 using std::FILE;
 using std::size_t;
 

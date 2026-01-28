@@ -38,7 +38,7 @@ typedef struct DVDDiskID {
 #define DVDResume() ((void)0)
 
 static inline const DVDDiskID* DVDGetCurrentDiskID(void) {
-    static DVDDiskID id = {{'R','S','P','E'}, {'01'}, 1, 0, 0, 0, {0}, 0, 0};
+    static DVDDiskID id = {{'R','S','P','E'}, {'0','1'}, 1, 0, 0, 0, {0}, 0, 0};
     return &id;
 }
 
