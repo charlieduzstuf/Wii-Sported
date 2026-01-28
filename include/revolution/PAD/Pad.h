@@ -1,6 +1,12 @@
 #ifndef RVL_SDK_PAD_H
 #define RVL_SDK_PAD_H
+
+// Include types.h BEFORE extern "C" to avoid C++ header issues
 #include <types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifdef PLATFORM_PC
 // PC gamepad/keyboard input using SDL2

@@ -19,7 +19,12 @@ void StoreBlocks(void* pDst, void* pSrc, u32 blocks);
 void StoreData(void* pDst, void* pSrc, u32 size);
 
 inline void* GetBase() {
+#ifdef PLATFORM_PC
+    // On PC, locked cache is not used, return NULL
+    return NULL;
+#else
     return reinterpret_cast<void*>(OS_CACHE_BASE);
+#endif
 }
 
 inline void QueueWait(u32 len) {

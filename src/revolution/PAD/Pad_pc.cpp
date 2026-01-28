@@ -1,9 +1,14 @@
+#ifdef PLATFORM_PC
+
+// Include C++ headers BEFORE revolution headers to avoid extern "C" conflicts
+#include <SDL2/SDL.h>
+#include <string.h>
+
+#endif
+
 #include <revolution/PAD.h>
 
 #ifdef PLATFORM_PC
-
-#include <SDL2/SDL.h>
-#include <string.h>
 
 static SDL_GameController* controller = NULL;
 

@@ -1,9 +1,14 @@
+#ifdef PLATFORM_PC
+
+// Include C++ headers BEFORE revolution headers to avoid extern "C" conflicts
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
+
+#endif
+
 #include <revolution/VI.h>
 
 #ifdef PLATFORM_PC
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_opengl.h>
 
 static u32 retraceCount = 0;
 static BOOL isBlack = FALSE;
